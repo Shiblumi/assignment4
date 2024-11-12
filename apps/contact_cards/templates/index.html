@@ -49,7 +49,33 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
         </div>
       </div>
       <div>
-        <table class="table is-fullwidth is-striped mt-4">
+        <ul>
+          <li v-for="contact in contacts" :key="contact.id">
+            <div class="card contact mt-4">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="photo image is-96x96">
+                      <!-- Of course, below, the src field has to change in the vue implementation... -->
+                      <img class="photo" :src="contact.contact_image"/>
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title person-name">{{ contact.contact_name }}</p>
+                    <p class="subtitle person-affiliation">{{ contact.contact_affiliation }}</p>
+                  </div>
+                  <div class="media-right"><i class="delete-button has-text-danger fa fa-trash trash"></i></div>
+                </div>
+                  <textarea class="textarea"
+                            name="description"
+                            placeholder="Description"
+                            v-model="contact.contact_description"
+                    ></textarea> 
+                </div>
+              </div>
+          </li>
+        </ul>
+        <!-- <table class="table is-fullwidth is-striped mt-4">
           <tr class="card contact mt-4" v-for="contact in contacts" :key="contact.id">
             <td>
               <div class="card">
@@ -58,16 +84,22 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                     <div class="media-left">
                       <figure class="image is-96x96">
                         <img class="photo" :src="contact.contact_image"/>
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title person-name">{{ contact.contact_name }}</p>
+                      <p class="subtitle person-affiliation">{{ contact.contact_affiliation }}</p>
                     </div>
                   </div>
                 </div>
+                <div class="card-content">
+                  <div class="content">
+                    <p>{{ contact.contact_description }}</p>
+                  </div>
               </div>
             </td>
-            <td>{{ contact.contact_name }}</td>
-            <td>{{ contact.contact_affiliation }}</td>
-            <td>{{ contact.contact_description }}</td>
           </tr>
-        </table>
+        </table> -->
       </div>
     </div>
   </div>
