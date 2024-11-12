@@ -48,6 +48,27 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
             ></textarea> 
         </div>
       </div>
+      <div>
+        <table class="table is-fullwidth is-striped mt-4">
+          <tr class="card contact mt-4" v-for="contact in contacts" :key="contact.id">
+            <td>
+              <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-96x96">
+                        <img class="photo" :src="contact.contact_image"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>{{ contact.contact_name }}</td>
+            <td>{{ contact.contact_affiliation }}</td>
+            <td>{{ contact.contact_description }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

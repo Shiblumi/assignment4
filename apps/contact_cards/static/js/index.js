@@ -13,6 +13,7 @@ app.data = {
             contact_name: "",
             contact_affiliation: "",
             contact_description: "",
+            toggle_add_contact: false,
         };
     },
     methods: {
