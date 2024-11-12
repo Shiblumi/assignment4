@@ -37,6 +37,7 @@ def index():
     return dict(
         get_contacts_url = URL('get_contacts'),
         add_contact_url = URL('add_contact'),
+        delete_contact_url = URL('delete_contact'),
     )
 
 @action('get_contacts', method=["GET"])
@@ -58,3 +59,13 @@ def add_contact():
                                 contact_name=contact_name,
                                 contact_affiliation=contact_affiliation,
                                 contact_description=contact_description)
+        
+@action('delete_contact', method=["POST"])
+@action.uses(db, auth.user)
+def delete_contact():
+    user_email = get_user_email()
+    id = request.json.get('id')
+    if user_email:
+        db((db.contact_card.user_email == user_email) & (db.contact_card.id == id)).delete()
+        
+    

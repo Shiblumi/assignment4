@@ -1,1 +1,1 @@
-py4web run --errorlog=:stdout -L 20 apps
+py4web run --watch=sync --errorlog=:stdout -L 20 apps

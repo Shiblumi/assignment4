@@ -30,6 +30,14 @@ app.data = {
                 app.vue.contact_description = "";
             })
         },
+
+        delete_contact: function (contact_id) {
+            axios.post(delete_contact_url, {
+                id: contact_id,
+            }).then(function (res) {
+                app.load_data();
+            })
+        }
     }
 };
 

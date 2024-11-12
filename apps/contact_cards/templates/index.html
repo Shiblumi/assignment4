@@ -64,7 +64,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                     <p class="title person-name">{{ contact.contact_name }}</p>
                     <p class="subtitle person-affiliation">{{ contact.contact_affiliation }}</p>
                   </div>
-                  <div class="media-right"><i class="delete-button has-text-danger fa fa-trash trash"></i></div>
+                  <div class="media-right"><i class="delete-button has-text-danger fa fa-trash trash" @click="delete_contact(contact.id)"></i></div>
                 </div>
                   <textarea class="textarea"
                             name="description"
@@ -111,6 +111,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
 <script>
   let get_contacts_url = "[[=XML(get_contacts_url)]]";
   let add_contact_url = "[[=XML(add_contact_url)]]";
+  let delete_contact_url = "[[=XML(delete_contact_url)]]";
 </script>
 
 <script src="js/index.js"></script>
