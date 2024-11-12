@@ -13,7 +13,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
   <!-- Put here your Vue.js template -->
   <div class="container">
     <h1 class="title">Contacts</h1>
-    <div><button class="button is-success" id="add_button">Add Contact</button></div>
+    <div><button class="button is-success" id="add_button" @click="add_contact">Add Contact</button></div>
     <div class="card contact mt-4">
       <div class="card-content">
         <div class="media">
@@ -28,12 +28,14 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
               <input type="text" class="input is-4 title" 
                     name="name"
                     placeholder="Name"
+                    v-model="contact_name"
               />
             </p>
             <p class="subtitle person-affiliation">
               <input type="text" class="input is-6" 
-                    placeholder="Affiliation"
                     name="affiliation"
+                    placeholder="Affiliation"
+                    v-model="contact_affiliation"
               />
             </p>
           </div>
@@ -42,6 +44,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
           <textarea class="textarea"
                     name="description"
                     placeholder="Description"
+                    v-model="contact_description"
             ></textarea> 
         </div>
       </div>
@@ -54,7 +57,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
 <!-- Loads the index-specific js for Vue -->
 <script>
   let get_contacts_url = "[[=XML(get_contacts_url)]]";
-  // Add more URLs if you wish. 
+  let add_contact_url = "[[=XML(add_contact_url)]]";
 </script>
 
 <script src="js/index.js"></script>

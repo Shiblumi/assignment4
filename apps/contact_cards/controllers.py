@@ -36,14 +36,25 @@ from .models import get_user_email
 def index():
     return dict(
         get_contacts_url = URL('get_contacts'),
-        # Complete. 
+        add_contact_url = URL('add_contact'),
     )
 
-@action('get_contacts')
+@action('get_contacts', method=["GET"])
 @action.uses(db, auth.user)
 def get_contacts():
-    contacts = [] # Complete. 
+    contacts = [] 
+    contacts = db(db.contact_card.user_email == get_user_email()).select().as_list()
     return dict(contacts=contacts)
 
-# You can add more methods. 
-
+@action('add_contact', method=["POST"])
+@action.uses(db, auth.user)
+def add_contact():
+    contact_name = request.json.get('contact_name')
+    contact_affiliation = request.json.get('contact_affiliation')
+    contact_description = request.json.get('contact_description')
+    user_email = get_user_email()
+    if user_email:
+        id = db.contact_card.insert(user_email=user_email,
+                                contact_name=contact_name,
+                                contact_affiliation=contact_affiliation,
+                                contact_description=contact_description)
