@@ -38,6 +38,7 @@ def index():
         get_contacts_url = URL('get_contacts'),
         add_contact_url = URL('add_contact'),
         delete_contact_url = URL('delete_contact'),
+        edit_contact_url = URL('edit_contact'),
     )
 
 @action('get_contacts', method=["GET"])
@@ -67,5 +68,18 @@ def delete_contact():
     id = request.json.get('id')
     if user_email:
         db((db.contact_card.user_email == user_email) & (db.contact_card.id == id)).delete()
+        
+@action('edit_contact', method=["POST"])
+@action.uses(db, auth.user)
+def edit_contact():
+    user_email = get_user_email()
+    id = request.json.get('id')
+    field_name = request.json.get('field_name')
+    field_value = request.json.get('field_value')
+    if user_email:
+        db((db.contact_card.user_email == user_email) & (db.contact_card.id == id)).update(**{field_name: field_value})
+    
+    
+    
         
     
