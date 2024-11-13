@@ -41,7 +41,7 @@ accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                             name="affiliation"
                             placeholder="Affiliation"
                             v-model="contact.contact_affiliation"
-                            :readonly="contact.contact_affiliaction_readonly"
+                            :readonly="contact.contact_affiliation_readonly"
                             @click="toggle_edit(contact, 'contact_affiliation')"
                             @blur="save_edit(contact, 'contact_affiliation')"
                       />
