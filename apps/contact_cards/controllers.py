@@ -39,7 +39,9 @@ def index():
         add_contact_url = URL('add_contact'),
         delete_contact_url = URL('delete_contact'),
         edit_contact_url = URL('edit_contact'),
+        upload_image_url = URL('upload_image'),
     )
+
 
 @action('get_contacts', method=["GET"])
 @action.uses(db, auth.user)
@@ -47,6 +49,7 @@ def get_contacts():
     contacts = [] 
     contacts = db(db.contact_card.user_email == get_user_email()).select().as_list()
     return dict(contacts=contacts)
+
 
 @action('add_contact', method=["POST"])
 @action.uses(db, auth.user)
@@ -60,7 +63,8 @@ def add_contact():
                                 contact_name=contact_name,
                                 contact_affiliation=contact_affiliation,
                                 contact_description=contact_description)
-        
+
+
 @action('delete_contact', method=["POST"])
 @action.uses(db, auth.user)
 def delete_contact():
@@ -68,7 +72,8 @@ def delete_contact():
     id = request.json.get('id')
     if user_email:
         db((db.contact_card.user_email == user_email) & (db.contact_card.id == id)).delete()
-        
+
+
 @action('edit_contact', method=["POST"])
 @action.uses(db, auth.user)
 def edit_contact():
@@ -78,7 +83,14 @@ def edit_contact():
     field_value = request.json.get('field_value')
     if user_email:
         db((db.contact_card.user_email == user_email) & (db.contact_card.id == id)).update(**{field_name: field_value})
-    
+
+
+@action('upload_image', method="POST")
+@action.uses(db, auth.user)
+def upload_image():
+    id = request.json.get("id")
+    image = request.json.get("contact_image")
+    db(db.contact_card.id == id).update(contact_image=image)
     
     
         
